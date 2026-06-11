@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Tiny Treasure Raffles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin-styles.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <div class="login-logo">
+                <img src="/assets/logo.png" alt="Tiny Treasure Raffles" height="40">
+            </div>
+            <h1 class="login-title">Admin Dashboard</h1>
+            <p class="login-subtitle">Enter your password to continue</p>
+            <form id="loginForm" class="login-form">
+                <input type="password" id="passwordInput" class="login-input" placeholder="Admin password" autocomplete="current-password" autofocus>
+                <div id="loginError" class="login-error"></div>
+                <button type="submit" class="btn btn-primary login-btn">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard" style="display:none">
+        <header class="dash-header">
+            <div class="container dash-header-inner">
+                <img src="/assets/logo.png" alt="Tiny Treasure Raffles" height="32">
+                <div class="dash-header-right">
+                    <span class="dash-admin-badge">Admin</span>
+                    <button id="logoutBtn" class="btn btn-secondary" style="padding:6px 16px;font-size:0.85rem">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dash-main">
+            <div class="container">
+                <!-- Stats Overview -->
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-card stat-revenue">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-label">Total Revenue</div>
+                        <div class="stat-value" id="statRevenue">£0</div>
+                    </div>
+                    <div class="stat-card stat-tickets">
+                        <div class="stat-icon">🎟️</div>
+                        <div class="stat-label">Tickets Sold</div>
+                        <div class="stat-value" id="statTickets">0</div>
+                    </div>
+                    <div class="stat-card stat-orders">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-label">Orders</div>
+                        <div class="stat-value" id="statOrders">0</div>
+                    </div>
+                    <div class="stat-card stat-raffles">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-label">Raffles</div>
+                        <div class="stat-value" id="statRaffles">3</div>
+                    </div>
+                </div>
+
+                <!-- Raffles Management -->
+                <section class="dash-section">
+                    <h2 class="dash-section-title">Raffle Management</h2>
+                    <div class="admin-raffles-grid" id="adminRaffles"></div>
+                </section>
+
+                <!-- Recent Orders -->
+                <section class="dash-section">
+                    <h2 class="dash-section-title">Recent Orders / Purchases</h2>
+                    <div class="dash-table-wrap">
+                        <table class="dash-table" id="ordersTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Raffle</th>
+                                    <th>Email</th>
+                                    <th>Tickets</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersBody"></tbody>
+                        </table>
+                    </div>
+                    <p class="dash-empty" id="ordersEmpty" style="display:none">No orders yet.</p>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = '';
+        let token = null;
+
+        // --- Login ---
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+            const errorEl = document.getElementById('loginError');
+            errorEl.textContent = '';
+
+            try {
+                const resp = await fetch(`${API_BASE}/api/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password }),
+                });
+                const data = await resp.json();
+                if (resp.ok) {
+                    token = data.token;
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    loadDashboard();
+                } else {
+                    errorEl.textContent = data.error || 'Invalid password';
+                }
+            } catch (err) {
+                errorEl.textContent = 'Connection error — is the server running?';
+            }
+        });
+
+        // Enter key on password
+        document.getElementById('passwordInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        });
+
+        // --- Logout ---
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            token = null;
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+        });
+
+        // --- Load Dashboard ---
+        async function loadDashboard() {
+            try {
+                const resp = await fetch(`${API_BASE}/api/admin/stats`, {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                });
+                if (resp.status === 401) {
+                    alert('Session expired. Please login again.');
+                    document.getElementById('logoutBtn').click();
+                    return;
+                }
+                const data = await resp.json();
+
+                // Stats
+                document.getElementById('statRevenue').textContent = `£${data.totalRevenue}`;
+                document.getElementById('statTickets').textContent = data.totalTickets;
+                document.getElementById('statOrders').textContent = data.totalOrders;
+                document.getElementById('statRaffles').textContent = data.raffles.length;
+
+                // Raffles
+                renderRaffles(data.raffles);
+
+                // Orders
+                renderOrders(data.recentOrders);
+            } catch (err) {
+                console.error('Failed to load dashboard:', err);
+            }
+        }
+
+        function renderRaffles(raffles) {
+            const container = document.getElementById('adminRaffles');
+            container.innerHTML = raffles.map(r => {
+                const pct = Math.round((r.ticketsSold / r.maxTickets) * 100);
+                const isCompleted = r.status === 'completed';
+                return `
+                    <div class="admin-raffle-card ${isCompleted ? 'completed' : ''}">
+                        <div class="admin-raffle-header">
+                            <span class="admin-raffle-emoji">${r.emoji}</span>
+                            <div>
+                                <h3 class="admin-raffle-name">${r.name}</h3>
+                                <span class="admin-raffle-status status-${r.status}">${isCompleted ? '✅ Completed' : '🟢 Active'}</span>
+                            </div>
+                        </div>
+                        <div class="admin-raffle-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:${pct}%"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span>${r.ticketsSold} / ${r.maxTickets} tickets</span>
+                                <span>${pct}%</span>
+                            </div>
+                        </div>
+                        <div class="admin-raffle-meta">
+                            <span>📦 ${r.orders} orders</span>
+                            <span>💰 £${r.revenue} revenue</span>
+                        </div>
+                        ${isCompleted ? `
+                            <div class="admin-winner-box">
+                                🏆 Winner: <strong>${r.winner?.email || '—'}</strong>
+                                <small>(${r.winner?.quantity || 0} tickets)</small>
+                            </div>
+                            <button class="btn btn-secondary admin-action-btn" onclick="resetRaffle('${r.id}')">
+                                🔄 Reset Raffle
+                            </button>
+                        ` : `
+                            <button class="btn btn-primary admin-action-btn" onclick="completeRaffle('${r.id}')">
+                                🎯 Draw Winner & Complete
+                            </button>
+                        `}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderOrders(orders) {
+            const tbody = document.getElementById('ordersBody');
+            const empty = document.getElementById('ordersEmpty');
+
+            if (!orders || orders.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+            tbody.innerHTML = orders.map(o => {
+                const date = new Date(o.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                return `
+                    <tr>
+                        <td>#${o.id}</td>
+                        <td>${o.raffleName}</td>
+                        <td>${o.email}</td>
+                        <td>${o.quantity}</td>
+                        <td>£${o.amount}</td>
+                        <td>${date}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        async function completeRaffle(raffleId) {
+            if (!confirm('Draw a winner and mark this raffle as complete?')) return;
+            try {
+                const resp = await fetch(`${API_BASE}/api/admin/raffles/${raffleId}/complete`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                });
+                const data = await resp.json();
+                if (resp.ok) {
+                    alert(`🎉 ${data.message}`);
+                    loadDashboard();
+                } else {
+                    alert(data.error || 'Failed to complete raffle');
+                }
+            } catch (err) {
+                alert('Server error');
+            }
+        }
+
+        async function resetRaffle(raffleId) {
+            if (!confirm('Reset this raffle to active? This will clear the winner.')) return;
+            try {
+                const resp = await fetch(`${API_BASE}/api/admin/reset-raffle/${raffleId}`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                });
+                if (resp.ok) {
+                    loadDashboard();
+                } else {
+                    const data = await resp.json();
+                    alert(data.error || 'Failed to reset raffle');
+                }
+            } catch (err) {
+                alert('Server error');
+            }
+        }
+
+        // Refresh every 30 seconds
+        setInterval(() => {
+            if (token) loadDashboard();
+        }, 30000);
+    </script>
+</body>
+</html>

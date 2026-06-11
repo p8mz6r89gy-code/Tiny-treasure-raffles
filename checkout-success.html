@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful — Tiny Treasure Raffles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .success-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+            background: linear-gradient(160deg, var(--teal-dark) 0%, var(--teal) 50%, var(--teal-light) 100%);
+        }
+        .success-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: var(--space-3xl) var(--space-2xl);
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+        }
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+        }
+        .success-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--brown);
+            margin-bottom: var(--space-sm);
+        }
+        .success-details {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: var(--space-lg);
+            line-height: 1.5;
+        }
+        .success-details strong {
+            color: var(--teal);
+        }
+        .success-note {
+            background: var(--cream-card);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            border: 1px solid rgba(253,184,19,0.2);
+            margin-bottom: var(--space-xl);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .success-note .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        .simulated-badge {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-md);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-page">
+        <div class="success-card">
+            <div class="success-icon">🎉</div>
+            <div id="simulatedBadge" class="simulated-badge" style="display:none">DEMO MODE</div>
+            <h1 class="success-title">Payment Successful!</h1>
+            <p class="success-details">
+                You've entered <strong id="qtyDisplay">—</strong> ticket(s) for the<br>
+                <strong id="raffleDisplay">—</strong> raffle.
+            </p>
+            <div class="success-note">
+                🎟️ Your ticket numbers will be emailed to you shortly.<br>
+                Winners are drawn live and announced publicly.<br>
+                <span class="gold">Good luck!</span>
+            </div>
+            <div class="success-actions">
+                <a href="/" class="btn btn-primary">← Back to Raffles</a>
+                <a href="/#winners" class="btn btn-secondary">View Recent Winners</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Read query params
+        const params = new URLSearchParams(window.location.search);
+        const raffle = params.get('raffle') || '—';
+        const qty = params.get('qty') || '—';
+        const simulated = params.get('simulated');
+
+        document.getElementById('raffleDisplay').textContent = decodeURIComponent(raffle);
+        document.getElementById('qtyDisplay').textContent = qty;
+
+        if (simulated === 'true') {
+            document.getElementById('simulatedBadge').style.display = 'inline-block';
+        }
+
+        // Auto-redirect to home after 10 seconds
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 10000);
+    </script>
+</body>
+</html>

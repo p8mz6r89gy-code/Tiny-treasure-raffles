@@ -1,0 +1,335 @@
+/* =============================================
+   Tiny Treasure Raffles — Admin Dashboard styles
+   ============================================= */
+@import url('/styles.css');
+
+/* --- Login Screen --- */
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, var(--teal-dark), var(--teal), var(--teal-light));
+    padding: var(--space-lg);
+}
+
+.login-card {
+    background: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3xl) var(--space-2xl);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+
+.login-logo {
+    margin-bottom: var(--space-lg);
+}
+
+.login-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--brown);
+    margin-bottom: var(--space-xs);
+}
+
+.login-subtitle {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-xl);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.login-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid rgba(11,132,148,0.2);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--brown);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.login-input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(11,132,148,0.12);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+}
+
+.login-error {
+    color: var(--danger);
+    font-size: 0.85rem;
+    min-height: 1.2em;
+}
+
+/* --- Dashboard Layout --- */
+.dashboard {
+    min-height: 100vh;
+    background: var(--cream);
+}
+
+.dash-header {
+    background: var(--teal);
+    padding: var(--space-sm) 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.dash-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dash-header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.dash-admin-badge {
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-xl);
+}
+
+.dash-main {
+    padding: var(--space-2xl) 0;
+}
+
+/* --- Stats Cards --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+}
+
+.stat-card {
+    background: var(--cream-card);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    border: 1px solid rgba(253,184,19,0.1);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--brown);
+}
+
+/* --- Dashboard Sections --- */
+.dash-section {
+    margin-bottom: var(--space-2xl);
+}
+
+.dash-section-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--brown);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid rgba(253,184,19,0.15);
+}
+
+/* --- Admin Raffle Cards --- */
+.admin-raffles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.admin-raffle-card {
+    background: var(--cream-card);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    border: 1px solid rgba(253,184,19,0.15);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s;
+}
+
+.admin-raffle-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.admin-raffle-card.completed {
+    border-color: var(--teal);
+    background: rgba(11,132,148,0.03);
+}
+
+.admin-raffle-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.admin-raffle-emoji {
+    font-size: 2rem;
+}
+
+.admin-raffle-name {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--brown);
+    margin-bottom: 2px;
+}
+
+.admin-raffle-status {
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.status-active {
+    color: var(--teal);
+}
+
+.status-completed {
+    color: var(--teal);
+}
+
+.admin-raffle-progress {
+    margin-bottom: var(--space-md);
+}
+
+.admin-raffle-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-bottom: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(253,184,19,0.08);
+}
+
+.admin-winner-box {
+    background: rgba(253,184,19,0.1);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.85rem;
+    color: var(--brown);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.admin-winner-box strong {
+    color: var(--teal);
+}
+
+.admin-action-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* --- Orders Table --- */
+.dash-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(253,184,19,0.1);
+}
+
+.dash-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.dash-table thead {
+    background: var(--cream-card);
+}
+
+.dash-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--brown);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid rgba(253,184,19,0.12);
+}
+
+.dash-table td {
+    padding: 10px 16px;
+    color: var(--text);
+    border-bottom: 1px solid rgba(253,184,19,0.06);
+}
+
+.dash-table tbody tr:hover {
+    background: rgba(11,132,148,0.03);
+}
+
+.dash-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.dash-empty {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .admin-raffles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .admin-raffles-grid {
+        grid-template-columns: 1fr;
+    }
+    .dash-table {
+        font-size: 0.8rem;
+    }
+    .dash-table th,
+    .dash-table td {
+        padding: 8px 10px;
+    }
+}

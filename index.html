@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tiny Treasure Raffles - Win amazing kids toys from just £1 per ticket. LEGO, Nintendo Switch and more!">
+    <title>Tiny Treasure Raffles – Win Amazing Kids Toys</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo-link">
+                <img src="/assets/logo.png" alt="Tiny Treasure Raffles" class="site-logo" width="160" height="44">
+            </a>
+            <nav class="main-nav" id="mainNav">
+                <a href="#raffles" class="nav-link">Raffles</a>
+                <a href="#winners" class="nav-link">Winners</a>
+                <a href="#trust" class="nav-link">Reviews</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-badge">🇬🇧 UK Raffles</div>
+            <h1 class="hero-title">
+                WIN AMAZING<br>
+                <span class="text-orange">KIDS TOYS</span>
+            </h1>
+            <p class="hero-subtitle">Premium toys your kids will love — from just <strong>£1 per ticket</strong></p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">1,200+</span>
+                    <span class="hero-stat-label">Tickets Sold</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">£5k+</span>
+                    <span class="hero-stat-label">Prizes Won</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">97%</span>
+                    <span class="hero-stat-label">Happy Customers</span>
+                </div>
+            </div>
+            <a href="#raffles" class="btn btn-primary btn-lg hero-cta">
+                ENTER LIVE RAFFLES
+                <span class="btn-arrow">→</span>
+            </a>
+            <p class="hero-footnote">No spam. No hidden fees. Winners drawn publicly.</p>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Three simple steps to win</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Pick a Raffle</h3>
+                    <p class="step-desc">Choose from our amazing kids toys — LEGO, Nintendo Switch, and more!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Buy Tickets</h3>
+                    <p class="step-desc">Each ticket is just £1. The more you buy, the better your chances!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Win &amp; Celebrate</h3>
+                    <p class="step-desc">We draw winners live. You get your prize shipped free to your door!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Raffles Section -->
+    <section id="raffles" class="section section-cream">
+        <div class="container">
+            <h2 class="section-title">🎉 Live Raffles</h2>
+            <p class="section-subtitle">Enter now — tickets selling fast!</p>
+            <div class="raffles-grid">
+                <!-- Raffle 1: LEGO Set -->
+                <div class="raffle-card">
+                    <div class="raffle-badge hot">🔥 Hot</div>
+                    <div class="raffle-image">
+                        <span class="raffle-emoji">🧱</span>
+                    </div>
+                    <h3 class="raffle-title">LEGO Icons Castle</h3>
+                    <div class="raffle-retail">Retail value: <strong>£249</strong></div>
+                    <div class="raffle-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 68.4%"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span class="progress-sold">342 / 500 tickets</span>
+                            <span class="progress-pct">68% sold</span>
+                        </div>
+                    </div>
+                    <div class="raffle-price">£1 <span>per ticket</span></div>
+                    <button class="btn btn-primary raffle-cta buy-tickets-btn" data-raffle="LEGO Icons Castle">
+                        Buy Tickets
+                    </button>
+                </div>
+
+                <!-- Raffle 2: Nintendo Switch -->
+                <div class="raffle-card featured">
+                    <div class="raffle-badge popular">⭐ Popular</div>
+                    <div class="raffle-image">
+                        <span class="raffle-emoji">🎮</span>
+                    </div>
+                    <h3 class="raffle-title">Nintendo Switch OLED</h3>
+                    <div class="raffle-retail">Retail value: <strong>£279</strong></div>
+                    <div class="raffle-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 58.6%"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span class="progress-sold">293 / 500 tickets</span>
+                            <span class="progress-pct">59% sold</span>
+                        </div>
+                    </div>
+                    <div class="raffle-price">£1 <span>per ticket</span></div>
+                    <button class="btn btn-primary raffle-cta buy-tickets-btn" data-raffle="Nintendo Switch OLED">
+                        Buy Tickets
+                    </button>
+                </div>
+
+                <!-- Raffle 3: LEGO Technic -->
+                <div class="raffle-card">
+                    <div class="raffle-badge new">🆕 New</div>
+                    <div class="raffle-image">
+                        <span class="raffle-emoji">🚗</span>
+                    </div>
+                    <h3 class="raffle-title">LEGO Technic Porsche</h3>
+                    <div class="raffle-retail">Retail value: <strong>£169</strong></div>
+                    <div class="raffle-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 27.4%"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span class="progress-sold">137 / 500 tickets</span>
+                            <span class="progress-pct">27% sold</span>
+                        </div>
+                    </div>
+                    <div class="raffle-price">£1 <span>per ticket</span></div>
+                    <button class="btn btn-primary raffle-cta buy-tickets-btn" data-raffle="LEGO Technic Porsche">
+                        Buy Tickets
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Winners Section -->
+    <section id="winners" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">🏆 Recent Winners</h2>
+            <p class="section-subtitle">Real people, real prizes — drawn fairly every time</p>
+            <div class="winners-grid">
+                <div class="winner-card">
+                    <div class="winner-avatar">
+                        <span class="winner-emoji">🌟</span>
+                    </div>
+                    <div class="winner-info">
+                        <h3 class="winner-name">Sarah <span class="winner-location">— Manchester</span></h3>
+                        <p class="winner-prize">Won the <strong>LEGO Icons Castle</strong></p>
+                        <div class="winner-tickets">Bought 12 tickets • Drawn 2 days ago</div>
+                    </div>
+                </div>
+
+                <div class="winner-card">
+                    <div class="winner-avatar">
+                        <span class="winner-emoji">🏅</span>
+                    </div>
+                    <div class="winner-info">
+                        <h3 class="winner-name">James <span class="winner-location">— Bristol</span></h3>
+                        <p class="winner-prize">Won the <strong>Nintendo Switch OLED</strong></p>
+                        <div class="winner-tickets">Bought 8 tickets • Drawn 5 days ago</div>
+                    </div>
+                </div>
+
+                <div class="winner-card">
+                    <div class="winner-avatar">
+                        <span class="winner-emoji">⭐</span>
+                    </div>
+                    <div class="winner-info">
+                        <h3 class="winner-name">Priya <span class="winner-location">— London</span></h3>
+                        <p class="winner-prize">Won the <strong>LEGO Technic Porsche</strong></p>
+                        <div class="winner-tickets">Bought 5 tickets • Drawn 1 week ago</div>
+                    </div>
+                </div>
+
+                <div class="winner-card">
+                    <div class="winner-avatar">
+                        <span class="winner-emoji">💫</span>
+                    </div>
+                    <div class="winner-info">
+                        <h3 class="winner-name">Tom <span class="winner-location">— Edinburgh</span></h3>
+                        <p class="winner-prize">Won the <strong>LEGO Harry Potter Hogwarts</strong></p>
+                        <div class="winner-tickets">Bought 20 tickets • Drawn 10 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust / Ratings Section -->
+    <section id="trust" class="section section-teal">
+        <div class="container">
+            <h2 class="section-title text-white">💎 Trusted by Hundreds of Customers</h2>
+            <p class="section-subtitle text-white-dim">We believe in fair play, transparency, and happy kids</p>
+
+            <div class="trust-badge-row">
+                <div class="trust-badge">
+                    <div class="stars">★★★★★</div>
+                    <span class="trust-rating">4.9 / 5.0</span>
+                    <span class="trust-source">Trustpilot</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="stars">★★★★★</div>
+                    <span class="trust-rating">4.8 / 5.0</span>
+                    <span class="trust-source">Google Reviews</span>
+                </div>
+            </div>
+
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"I couldn't believe it when I won! My son was so happy with his LEGO castle. The whole process was so easy and transparent. Will definitely enter again!"</p>
+                    <div class="testimonial-author">
+                        <span class="testimonial-name">Sarah M.</span>
+                        <span class="testimonial-verified">✓ Verified Winner</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Great way to get premium toys without paying full price. I've entered a few raffles and love how they show the live ticket count and draw winners publicly."</p>
+                    <div class="testimonial-author">
+                        <span class="testimonial-name">David R.</span>
+                        <span class="testimonial-verified">✓ Verified Customer</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Bought a few tickets on a whim and actually won the Nintendo Switch! The kids were over the moon. Fast delivery too. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <span class="testimonial-name">James B.</span>
+                        <span class="testimonial-verified">✓ Verified Winner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trust-features">
+                <div class="trust-feature">
+                    <span class="trust-feature-icon">🔒</span>
+                    <span>Secure Payments</span>
+                </div>
+                <div class="trust-feature">
+                    <span class="trust-feature-icon">🎯</span>
+                    <span>Fair Draw System</span>
+                </div>
+                <div class="trust-feature">
+                    <span class="trust-feature-icon">📦</span>
+                    <span>Free UK Shipping</span>
+                </div>
+                <div class="trust-feature">
+                    <span class="trust-feature-icon">✅</span>
+                    <span>Verified Winners</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section section-cta">
+        <div class="container cta-inner">
+            <h2 class="cta-title">Ready to Win?</h2>
+            <p class="cta-subtitle">Your next big win is just £1 away. Enter a live raffle now!</p>
+            <a href="#raffles" class="btn btn-primary btn-lg">ENTER LIVE RAFFLES →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <img src="/assets/logo.png" alt="Tiny Treasure Raffles" class="site-logo footer-logo" width="140" height="38">
+                <p class="footer-tagline">Fun, trusted raffles for amazing kids toys.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <a href="#raffles" class="footer-link">Live Raffles</a>
+                    <a href="#winners" class="footer-link">Recent Winners</a>
+                    <a href="#trust" class="footer-link">Reviews</a>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <a href="#" class="footer-link">Terms &amp; Conditions</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Responsible Play</a>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact</h4>
+                    <a href="mailto:hello@tinytreasure.co.uk" class="footer-link">hello@tinytreasure.co.uk</a>
+                    <p class="footer-contact-text">UK-based customer support</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tiny Treasure Raffles. All rights reserved. 18+ only. Please play responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Buy Tickets Modal -->
+    <div class="modal-overlay" id="buyModal">
+        <div class="modal">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-icon">🎟️</div>
+            <h2 class="modal-title">Buy Tickets</h2>
+            <p class="modal-raffle-name" id="modalRaffleName">LEGO Set</p>
+
+            <div class="modal-section">
+                <label class="modal-label" for="modalEmail">Your Email</label>
+                <input type="email" id="modalEmail" class="modal-input" placeholder="you@example.com" required autocomplete="email">
+            </div>
+
+            <div class="modal-divider"></div>
+
+            <div class="modal-ticket-selector">
+                <button class="ticket-qty-btn" id="ticketDec">−</button>
+                <span class="ticket-qty" id="ticketQty">5</span>
+                <button class="ticket-qty-btn" id="ticketInc">+</button>
+            </div>
+            <div class="modal-total">
+                Total: <span class="modal-total-amount" id="modalTotal">£5.00</span>
+            </div>
+            <button class="btn btn-primary modal-cta" id="modalCheckout">
+                Pay with Card
+            </button>
+            <p class="modal-footnote">🔒 Secure payment via Stripe. Your card details are never stored.</p>
+            <div class="modal-error" id="modalError"></div>
+            <div class="modal-loading" id="modalLoading" style="display:none">
+                <div class="spinner"></div>
+                <span>Redirecting to checkout...</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
