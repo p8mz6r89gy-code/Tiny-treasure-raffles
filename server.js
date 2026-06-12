@@ -12,7 +12,7 @@ try {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
+const SITE_URL = process.env.SITE_URL || 'https://thetinytreasures.co.uk';
 
 // ---------------------------------------------------------------------------
 // Stripe setup (graceful if no key configured)
@@ -35,6 +35,7 @@ if (stripeSecretKey && !stripeSecretKey.startsWith('sk_test_placeholder')) {
 // ---------------------------------------------------------------------------
 // Middleware
 // ---------------------------------------------------------------------------
+app.set('trust proxy', 1); // Trust reverse proxy (Railway, Render, Fly.io)
 app.use(cors());
 app.use(express.json({
     // Webhook needs raw body — handled separately below

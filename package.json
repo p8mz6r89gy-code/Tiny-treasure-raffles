@@ -1,14 +1,17 @@
 {
   "name": "tiny-treasure-raffles",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Fun, trusted raffle platform for amazing kids toys. Win LEGO, Nintendo Switch and more from just £1 per ticket.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["raffle", "toys", "stripe", "kids", "uk"],
+  "author": "Tiny Treasure Raffles",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
